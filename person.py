@@ -45,13 +45,17 @@ class Person:
     def __init__(self,name,descriptor):
         self.name = name
         self.descriptors = [descriptor]
+        self.mean_descriptor = descriptor
+
         
     def __repr__(self):
         return "P: {} ∆ {}".format(self.name,len(self.descriptors))
     
+
+
     def mean_descriptor(self):
         """
-        returns 128-d NumPy vector for the average descriptor of the person
+        computes 128-d NumPy vector for the average descriptor of the person
         
         Parameters:
         -----------
@@ -61,7 +65,7 @@ class Person:
         --------
         [array shape (128,)]
             Average descriptor for the person"""
-        return np.mean(self.descriptors,axis =0)
+        self.mean_descriptor = np.mean(self.descriptors,axis =0)
     
     def add_descriptor(self,descriptor):
         """
@@ -76,5 +80,15 @@ class Person:
         None"""
         
         self.descriptors.append(descriptor)
-    
-    
+        self.mean_descriptor()
+
+    def match(self, v2, cutoff):
+        """
+        parameters: np.array(float) shape: (128,), float
+        returns: boolean
+        This function takes a 128-dimensional vectors and returns whether this person is a match for the vector
+        """
+
+        temp = self.mean_descriptor - v2
+        temp = temp ** 2
+        return sum(temp) ** 1 / 2 < cutoff
