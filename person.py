@@ -1,4 +1,4 @@
-class person:
+class Person:
     '''Person object for facial recognition
     
     Parameters:
@@ -45,6 +45,9 @@ class person:
     def __init__(self,name,descriptor):
         self.name = name
         self.descriptors = [descriptor]
+        
+    def __repr__(self):
+        return "P: {} ∆ {}".format(self.name,len(self.descriptors))
     
     def mean_descriptor(self):
         """
@@ -73,3 +76,5 @@ class person:
         None"""
         
         self.descriptors.append(descriptor)
+    
+    
