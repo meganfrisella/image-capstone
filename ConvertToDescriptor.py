@@ -42,6 +42,11 @@ def image_to_descriptors(img_array, upscale=0):
     
     return descriptors
 
+
+def image_to_detections(img_array, upscale=0):
+    return list(face_detect(img_array, upscale))
+
+
 def camera_to_descriptors(upscale=0):
     """
     Detects faces from a photo taken by the camera and turns
@@ -60,7 +65,8 @@ def camera_to_descriptors(upscale=0):
         given img_array.
     
     """
-    return image_to_descriptors(take_picture(), upscale)
+    image = take_picture()
+    return image, image_to_descriptors(image, upscale)
 
 def jpeg_to_descriptors(filepath, upscale=0):
     """
