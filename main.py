@@ -31,7 +31,7 @@ def run():
         ax.add_patch(rect)
 
         # Print their name (or 'Unknown')
-        plt.text(d.left(), d.bottom(), f"{name}", color='w')
+        plt.text(d.left(), d.bottom(), f"{name}", color='#42f545')
 
     plt.show()
 
