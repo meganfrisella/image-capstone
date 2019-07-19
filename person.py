@@ -1,4 +1,5 @@
 import numpy as np
+import pickle
 
 class Person:
     '''Person object for facial recognition
@@ -48,7 +49,7 @@ class Person:
         self.name = name
         if isinstance(descriptor_input,tuple):
             self.descriptors = [i for i in descriptor_input]
-        if isinstance(descriptor_input,np.ndarray):
+        if isinstance(descriptor_input,np.ndarray) or isinstance(descriptor_input,list):
             self.descriptors = descriptor_input
         self.mean_descriptor = np.mean(self.descriptors,axis=0)
 
