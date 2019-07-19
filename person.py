@@ -57,7 +57,7 @@ class Person:
         return "P: {} ∆ {}".format(self.name,len(self.descriptors))
     
     
-    def add_descriptor(self,descriptor):
+    def add_descriptor(self,descriptor,database):
         """
                 Adds a 128-d descriptor to the person's descriptor list
                 Also recomputes the mean_descriptor value
@@ -65,6 +65,8 @@ class Person:
         Parameters:
         ----------
         descriptor [array shape (128,)]
+
+        database [dict]
         
         Returns:
         --------
@@ -72,6 +74,9 @@ class Person:
         
         self.descriptors.append(descriptor)
         self.mean_descriptor = np.mean(self.descriptors,axis =0)
+        f = open('database.p','wb')
+        pickle.dump(database,f)
+        f.close
 
     def match(self, v2, cutoff):
         """
