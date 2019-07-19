@@ -8,9 +8,8 @@ file_paths = list()
 cutoff = 0.12
 
 for image in images:
-    print(myPath+image)
     ds = convert.jpeg_to_descriptors(myPath + image)
     descriptors.extend(ds)
-    file_paths.extend([image for i in range(ds)])
+    file_paths.extend([image for i in range(len(ds))])
 
 clusters = Whispers.create_clusters(Whispers.create_graph_and_matrix(descriptors, file_paths, cutoff))

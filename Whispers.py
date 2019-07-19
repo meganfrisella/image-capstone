@@ -33,15 +33,15 @@ def create_graph_and_matrix(descriptors, image_paths, cutoff):
     Turns descriptors into a graph and an adjacency matrix
     """
     graph = list()
-    adjacency_matrix = np.zeros((descriptors.shape[0], descriptors.shape[0]))
+    adjacency_matrix = np.zeros((len(descriptors), len(descriptors)))
     for i, j in enumerate(descriptors):
         neighbors = list()
         for k, l in enumerate(descriptors):
             if j == l:
                 continue
-            weight = weight(j, l, cutoff)
-            adjacency_matrix[i][k] = weight
-            adjacency_matrix[k][i] = weight
+            w = weight(j, l, cutoff)
+            adjacency_matrix[i][k] = w
+            adjacency_matrix[k][i] = w
             if adjacency_matrix[i][k] != 0:
                 neighbors.append(k)
 
