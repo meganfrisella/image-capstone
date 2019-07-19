@@ -32,6 +32,9 @@ def image_to_descriptors(img_array, upscale=0):
         given img_array.
         
     """
+    assert upscale >= 0 and isinstance(upscale, int)
+    assert len(img_array.shape) == 3
+    
     detections = list(face_detect(img_array, upscale))
     descriptors = []
     
