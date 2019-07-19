@@ -1,14 +1,17 @@
 import ConvertToDescriptor
 import person
 
-images = {"Megan Frisella": ["megan1.jpg", "megan2.jpg"]}
-myPath = "/Users/MeganFrisella/Image-Capstone/images/"
+images = {"Megan": ["m1.jpeg", "m2.jpeg", "m3.jpeg"], "Vaishnavi": ["v1.JPG", "v2.JPG", "v3.JPG", "v4.JPG"],
+          "Christian": ["c1.jpg", "c2.jpeg"]}
+myPath = "/Users/MeganFrisella/GitHub/Image-Capstone/images/"
 database = {}
 
 for name in images:
+    print(name)
     descriptors = []
     for path in images[name]:
-        descriptors = ConvertToDescriptor.jpeg_to_descriptors(myPath + path, upscale=1)
+        print(path)
+        descriptors = ConvertToDescriptor.jpeg_to_descriptors(myPath + path, upscale=0)
 
     database[person] = person.Person(name, descriptors)
 

@@ -7,8 +7,8 @@ class Person:
     ----------
     name [string]
         Full name of the person 
-    descriptor [array of shape (128,)]
-        initial 128-d descriptor vector
+    descriptors [tuple of array of shape (128,)]
+        initial tuple of 128-d descriptor vectors
         
     Variables:
     ----------
@@ -44,10 +44,10 @@ class Person:
         None
     
     '''
-    def __init__(self,name,descriptor):
+    def __init__(self,name,descriptors):
         self.name = name
-        self.descriptors = [descriptor]
-        self.mean_descriptor = descriptor
+        self.descriptors = [i for i in descriptors]
+        self.mean_descriptor = np.mean(self.descriptors)
 
         
     def __repr__(self):
