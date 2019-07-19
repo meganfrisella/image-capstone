@@ -1,7 +1,6 @@
 import numpy as np
 import random
 
-
 class Node:
     def __init__(self, id, label, neighbors, image_path):
         self.id = id
@@ -16,6 +15,11 @@ def weight(v1, v2, cutoff):
     returns: boolean
     This function takes two 128-dimensional vectors and returns whether this person is a match for the vector
     """
+
+    """dists = -2 * np.matmul(v1, v2.T)
+    dists += np.sum(v1 ** 2, axis=1)[:, np.newaxis]
+    dists += np.sum(v2 ** 2, axis=1)
+    return np.sqrt(dists)"""
 
     temp = v1 - v2
     temp = temp ** 2
@@ -72,14 +76,10 @@ def create_clusters(graph, adjacency_matrix):
                 weight_pairings[neighbor.label] += adjacency_matrix[index][i]
             else:
                 weight_pairings[neighbor.label] = adjacency_matrix[index][i]
-        #print(weight_pairings)
         inverse = [(value, key) for key, value in weight_pairings.items()]
-        #print(inverse)
         if node.label != max(inverse)[1]:
-            print("here", node.id, max(inverse)[1])
             decrease = 0
             node.label = max(inverse)[1]
-            print("here2", node.id, max(inverse)[1])
         decrease += 1
 
     clusters = dict()
