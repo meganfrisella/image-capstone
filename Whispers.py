@@ -24,10 +24,11 @@ def weight(v1, v2, cutoff):
     return 0
 
 
-def create_graph_and_matrix(descriptors, cutoff):
+def create_graph_and_matrix(descriptors, image_paths, cutoff):
     """
     :param descriptors: list() of np.array
             cutoff: float
+            image_paths: list of image paths corresponding to descriptors
     :return: list() of nodes, numpy.array
     Turns descriptors into a graph and an adjacency matrix
     """
@@ -44,8 +45,9 @@ def create_graph_and_matrix(descriptors, cutoff):
             if adjacency_matrix[i][k] != 0:
                 neighbors.append(k)
 
-        graph.append(Node(i, i, neighbors))
+        graph.append(Node(i, i, neighbors, image_paths[i]))
     return graph, adjacency_matrix
+
 
 def create_clusters(graph, adjacency_matrix):
     """
