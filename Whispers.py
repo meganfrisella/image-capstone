@@ -1,16 +1,14 @@
 import numpy as np
 import random
 
-#initialize this to all the descriptor vectors
-#Change this:
-cutoff = 0.2
 
 class Node:
-    def __init__(self, ID, label, neighbors, image_path):
-        self.id = ID
+    def __init__(self, id, label, neighbors, image_path):
+        self.id = id
         self.label = label
         self.neighbors = neighbors
         self.image_path = image_path
+
 
 def weight(v1, v2, cutoff):
     """
@@ -25,9 +23,11 @@ def weight(v1, v2, cutoff):
         return 1 / np.sum(temp)
     return 0
 
-def create_graph_and_matrix(descriptors):
+
+def create_graph_and_matrix(descriptors, cutoff):
     """
     :param descriptors: list() of np.array
+            cutoff: float
     :return: list() of nodes, numpy.array
     Turns descriptors into a graph and an adjacency matrix
     """
