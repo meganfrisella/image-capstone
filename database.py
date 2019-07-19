@@ -1,19 +1,26 @@
 import ConvertToDescriptor
 import person
+import pickle
 
 images = {"Megan": ["m1.jpeg", "m2.jpeg", "m3.jpeg"], "Vaishnavi": ["v1.JPG", "v2.JPG", "v3.JPG", "v4.JPG"],
           "Christian": ["c1.jpg", "c2.jpeg"]}
 myPath = "/Users/MeganFrisella/GitHub/Image-Capstone/images/"
 database = {}
 
-for name in images:
-    print(name)
-    descriptors = []
-    for path in images[name]:
-        print(path)
-        descriptors = ConvertToDescriptor.jpeg_to_descriptors(myPath + path, upscale=0)
 
-    database[person] = person.Person(name, descriptors)
+def generate_database():
+    for name in images:
+        print(name)
+        descriptors = []
+        for path in images[name]:
+            print(path)
+            descriptors = ConvertToDescriptor.jpeg_to_descriptors(myPath + path, upscale=0)
+
+        database[person] = person.Person(name, descriptors)
+
+    output = open('database.p', 'wb')
+    pickle.dump(database, output)
+    output.close()
 
 
 def load_database(database_type):
