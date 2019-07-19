@@ -18,8 +18,8 @@ def image_to_descriptors(img_array, upscale=0):
     
     Parameters
     ----------
-    img_array : np.array[int, int(, 3)]
-        RGB image-array or 8-bit greyscale
+    img_array : np.array[int]
+        RGB image-array or 8-bit greyscale of shape=(H, W(, 3))
     
     upscale : int, optional (default=0)
         The number of times to upscale the image and reprocess it,
@@ -29,7 +29,7 @@ def image_to_descriptors(img_array, upscale=0):
     -------
     List[np.array[float]]
         List of descriptor vectors of all detected faces in the
-        given img_array.
+        image
         
     """
     assert upscale >= 0 and isinstance(upscale, int)
@@ -45,10 +45,26 @@ def image_to_descriptors(img_array, upscale=0):
     
     return descriptors
 
-
 def image_to_detections(img_array, upscale=0):
+    """
+    Detects faces in an image array.
+    
+    Parameters
+    ----------
+    img_array : np.array[int]
+        RGB image-array or 8-bit greyscale of shape=(H, W(, 3))
+        
+    upscale : int, optional (default=0)
+        The number of times to upscale the image and reprocess it,
+        to find smaller faces
+    
+    Returns
+    -------
+    List[fhog_object_detector]
+        List of all face detections in the image
+    
+    """
     return list(face_detect(img_array, upscale))
-
 
 def camera_to_descriptors(upscale=0):
     """
@@ -63,13 +79,16 @@ def camera_to_descriptors(upscale=0):
     
     Returns
     -------
+    np.array[int]
+        RGB image-array or 8-bit greyscale of shape=(H, W(, 3))
+        
     List[np.array[float]]
         List of descriptor vectors of all detected faces in the
-        given img_array.
+        image
     
     """
-    image = take_picture()
-    return image, image_to_descriptors(image, upscale)
+    img_array = take_picture()
+    return img_array, image_to_descriptors(img_array, upscale)
 
 def jpeg_to_descriptors(filepath, upscale=0):
     """
@@ -89,7 +108,7 @@ def jpeg_to_descriptors(filepath, upscale=0):
     -------
     List[np.array[float]]
         List of descriptor vectors of all detected faces in the
-        given img_array.
+        image
     
     """
     return image_to_descriptors(io.imread(filepath), upscale)
