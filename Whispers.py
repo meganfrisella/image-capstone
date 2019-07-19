@@ -3,7 +3,8 @@ import random
 #initialize this to all the descriptor vectors
 descriptors = np.array([[]])
 adjacency_matrix = np.zeros((descriptors.shape[0], descriptors.shape[0]))
-
+#Change this:
+cutoff = 0.05
 
 class Node:
     def __init__(self, ID, label, neighbors):
@@ -33,8 +34,9 @@ for i, j in enumerate(descriptors):
     for k,l in enumerate(descriptors):
         if j==l:
             continue
-        adjacency_matrix[i][k] = weight(i, k)
-        adjacency_matrix[k][i] = weight(i, k)
+        weight = weight(i, k, cutoff)
+        adjacency_matrix[i][k] = weight
+        adjacency_matrix[k][i] = weight
         if adjacency_matrix[i][k] != 0:
             neighbors.append(k)
 
