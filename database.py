@@ -41,3 +41,23 @@ def load_database(database_type):
     elif database_type is "list":
         return database.values()
 
+def add_person(person,database):
+    '''
+    Adds a person object to the database
+
+    Parameters:
+    -----------
+    person [type: Person]
+        The Person object you want to add to the database
+
+    database [type: dict]
+        The database dictionary
+
+    Returns:
+    --------
+    Nothing
+    '''
+    database[person.name] = person
+    f = open('database.p','wb')
+    pickle.dump(database,f)
+    f.close
