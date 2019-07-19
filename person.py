@@ -1,3 +1,5 @@
+import numpy as np
+
 class Person:
     '''Person object for facial recognition
     
@@ -51,25 +53,11 @@ class Person:
     def __repr__(self):
         return "P: {} ∆ {}".format(self.name,len(self.descriptors))
     
-
-
-    def mean_descriptor(self):
-        """
-        computes 128-d NumPy vector for the average descriptor of the person
-        
-        Parameters:
-        -----------
-        None
-        
-        Returns:
-        --------
-        [array shape (128,)]
-            Average descriptor for the person"""
-        self.mean_descriptor = np.mean(self.descriptors,axis =0)
     
     def add_descriptor(self,descriptor):
         """
                 Adds a 128-d descriptor to the person's descriptor list
+                Also recomputes the mean_descriptor value
     
         Parameters:
         ----------
@@ -80,7 +68,7 @@ class Person:
         None"""
         
         self.descriptors.append(descriptor)
-        self.mean_descriptor()
+        self.mean_descriptor = np.mean(self.descriptors,axis =0)
 
     def match(self, v2, cutoff):
         """
