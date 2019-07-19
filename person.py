@@ -47,7 +47,7 @@ class Person:
     def __init__(self,name,descriptor_input):
         self.name = name
         if isinstance(descriptor_input,tuple):
-            self.descriptors = [i for i in descriptor_tuple]
+            self.descriptors = [i for i in descriptor_input]
         if isinstance(descriptor_input,np.ndarray):
             self.descriptors = descriptor_input
         self.mean_descriptor = np.mean(self.descriptors,axis=0)
