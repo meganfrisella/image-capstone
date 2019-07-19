@@ -33,15 +33,15 @@ def create_graph_and_matrix(descriptors, image_paths, cutoff):
     Turns descriptors into a graph and an adjacency matrix
     """
     graph = list()
-    adjacency_matrix = np.zeros((descriptors.shape[0], descriptors.shape[0]))
+    adjacency_matrix = np.zeros((len(descriptors), len(descriptors)))
     for i, j in enumerate(descriptors):
         neighbors = list()
         for k, l in enumerate(descriptors):
-            if j == l:
+            if i == k:
                 continue
-            weight = weight(j, l, cutoff)
-            adjacency_matrix[i][k] = weight
-            adjacency_matrix[k][i] = weight
+            w = weight(j, l, cutoff)
+            adjacency_matrix[i][k] = w
+            adjacency_matrix[k][i] = w
             if adjacency_matrix[i][k] != 0:
                 neighbors.append(k)
 
@@ -56,9 +56,14 @@ def create_clusters(graph, adjacency_matrix):
     :return: dict()
     This function turns a graph of nodes into a list of images that correspond to a cluster
         """
+    #print(len(graph), graph)
+    #print(adjacency_matrix)
+
     decrease = 0
-    while decrease < graph.shape[0]*1.5:
-        index = random.randint(0, graph.shape[0])
+    while decrease < len(graph)*1.5:
+        index = random.randint(0, len(graph)-1)
+        #print("index: ", index)
+        #print(len(graph))
         node = graph[index]
         weight_pairings = dict()
         for i in node.neighbors:
@@ -67,12 +72,14 @@ def create_clusters(graph, adjacency_matrix):
                 weight_pairings[neighbor.label] += adjacency_matrix[index][i]
             else:
                 weight_pairings[neighbor.label] = adjacency_matrix[index][i]
-
+        #print(weight_pairings)
         inverse = [(value, key) for key, value in weight_pairings.items()]
-
-        if node.id != max(inverse)[1]:
+        #print(inverse)
+        if node.label != max(inverse)[1]:
+            print("here", node.id, max(inverse)[1])
             decrease = 0
-            node.id = max(inverse)[1]
+            node.label = max(inverse)[1]
+            print("here2", node.id, max(inverse)[1])
         decrease += 1
 
     clusters = dict()
