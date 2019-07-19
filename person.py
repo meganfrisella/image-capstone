@@ -7,8 +7,8 @@ class Person:
     ----------
     name [string]
         Full name of the person 
-    descriptors [tuple of array of shape (128,)]
-        initial tuple of 128-d descriptor vectors
+    descriptor_input [128-d vector or tuple of array of shape (128,)]
+        initial descriptor vector or tuple of 128-d descriptor vectors
         
     Variables:
     ----------
@@ -44,9 +44,12 @@ class Person:
         None
     
     '''
-    def __init__(self,name,descriptor_tuple):
+    def __init__(self,name,descriptor_input):
         self.name = name
-        self.descriptors = [i for i in descriptor_tuple]
+        if isinstance(descriptor_input,tuple):
+            self.descriptors = [i for i in descriptor_tuple]
+        if isinstance(descriptor_input,np.ndarray):
+            self.descriptors = descriptor_input
         self.mean_descriptor = np.mean(self.descriptors,axis=0)
 
         
