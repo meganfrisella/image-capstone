@@ -38,7 +38,7 @@ def image_to_descriptors(img_array, upscale=0):
     for d in detections:
         shape = shape_predictor(img_array, d)
         face_descriptor = face_rec_model.compute_face_descriptor(img_array, shape)
-        descriptors.append(np.array(face_descriptor))
+        descriptors.append(face_descriptor)
     
     return descriptors
 
