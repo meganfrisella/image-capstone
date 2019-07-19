@@ -34,7 +34,7 @@ for i, j in enumerate(descriptors):
     for k,l in enumerate(descriptors):
         if j==l:
             continue
-        weight = weight(i, k, cutoff)
+        weight = weight(j, l, cutoff)
         adjacency_matrix[i][k] = weight
         adjacency_matrix[k][i] = weight
         if adjacency_matrix[i][k] != 0:
