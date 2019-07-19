@@ -7,12 +7,11 @@ adjacency_matrix = np.zeros((descriptors.shape[0], descriptors.shape[0]))
 cutoff = 0.05
 
 class Node:
-    def __init__(self, ID, label, neighbors):
+    def __init__(self, ID, label, neighbors, image_path):
         self.id = ID
         self.label = label
         self.neighbors = neighbors
-
-
+        self.image_path = image_path
 
 def weight(v1, v2, cutoff):
     """
@@ -52,10 +51,11 @@ while(decrease < descriptors.shape[0]*1.5):
         neighbor = graph[i]
         if neighbor.label in weight_pairings:
             weight_pairings[neighbor.label] += adjacency_matrix[index][i]
+        else:
+            weight_pairings[neighbor.label] = adjacency_matrix[index][i]
 
     inverse = [(value, key) for key, value in weight_pairings.items()]
-    max(inverse)[1]
-
+   
     if node.id != max(inverse)[1]:
         decrease = 0
         node.id = max(inverse)[1]
