@@ -23,8 +23,8 @@ def weight(v1, v2, cutoff):
 
     temp = v1 - v2
     temp = temp ** 2
-    if sum(temp) ** 1 / 2 < cutoff:
-        return 1 / sum(temp)
+    if np.sum(temp) ** 1 / 2 < cutoff:
+        return 1 / np.sum(temp)
     return 0
 
 graph = list()

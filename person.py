@@ -79,4 +79,4 @@ class Person:
 
         temp = self.mean_descriptor - v2
         temp = temp ** 2
-        return sum(temp) ** 1 / 2 < cutoff
+        return np.sum(temp) ** 1 / 2 < cutoff
