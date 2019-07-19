@@ -26,12 +26,10 @@ def run():
                          facecolor='none')
         ax.add_patch(rect)
 
-        """
         # Add an unknown person to the database
         if name is 'Unknown':
             text = input("We don't know this person, what is their name? ")
             name = text
-        """
 
 
 
