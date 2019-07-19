@@ -8,6 +8,11 @@ myPath = "/Users/MeganFrisella/GitHub/Image-Capstone/images/"
 
 
 def generate_database():
+    """
+    Generates a database from images in the 'image' folder in the repo. To run this code, change 'myPath' to navigate
+    to the folder on your local computer.
+    :return: No return. Pickles the file in 'database.p'
+    """
     database = {}
 
     for name in images:
