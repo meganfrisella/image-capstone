@@ -1,8 +1,18 @@
 import Match
 import ConvertToDescriptor
-import person
+import database
+import matplotlib.pyplot as plt
+
+list_database = database.load_database("list")
 
 
 def run():
-    descriptors = ConvertToDescriptor.camera_to_descriptors(upscale=1)
-    name = Match.recognizeImage(people, descriptors, 0.5)
+    image, descriptors = ConvertToDescriptor.camera_to_descriptors(upscale=0)
+    name = Match.recognizeImage(list_database, descriptors, 0.2)
+
+    detections = ConvertToDescriptor.image_to_detections()
+
+    fig, ax = plt.subplots()
+    ax.imshow(image)
+
+    return name
