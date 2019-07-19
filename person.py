@@ -44,9 +44,9 @@ class Person:
         None
     
     '''
-    def __init__(self,name,descriptors):
+    def __init__(self,name,descriptor_tuple):
         self.name = name
-        self.descriptors = [i for i in descriptors]
+        self.descriptors = [i for i in descriptor_tuple]
         self.mean_descriptor = np.mean(self.descriptors,axis=0)
 
         
