@@ -74,7 +74,7 @@ def delete_person(person,database):
     database [type: dict]
         The database dictionary
     '''
-    del database(person.name)
+    del database[person.name]
     f = open('database.p','wb')
     pickle.dump(database,f)
     f.close
