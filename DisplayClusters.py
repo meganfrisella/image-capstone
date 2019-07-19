@@ -12,7 +12,7 @@ images = {"Megan": ["m1.jpeg", "m2.jpeg", "m3.jpeg"], "Vaishnavi": ["v1.JPG", "v
           "Christian": ["c1.jpg", "c2.jpeg"]}
 my_path = r"C:\Users\cbadu\Documents\BWSI_CogWorks\Capstone_Projects\Week2_Visual\image-capstone\images\\"
 
-def display_faces(database):
+def display_clusters(database):
     num_people = len(database)
     max_num_images = 0
     
@@ -25,7 +25,7 @@ def display_faces(database):
         
         for i in range(max_num_images):
             plt_idx = i*num_people + y + 1
-            plt.subplot(len(database), max_num_images, plt_idx)
+            plt.subplot(max_num_images, len(database), plt_idx)
             
             if i < len(img_names):
                 plt.imshow(io.imread(my_path + img_names[i]))
