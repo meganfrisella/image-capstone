@@ -4,7 +4,7 @@ import pickle
 
 images = {"Megan": ["m1.jpeg", "m2.jpeg", "m3.jpeg"], "Vaishnavi": ["v1.JPG", "v2.JPG", "v3.JPG", "v4.JPG"],
           "Christian": ["c1.jpg", "c2.jpeg"]}
-myPath = "/Users/MeganFrisella/GitHub/Image-Capstone/images/"
+myPath = "/Users/MeganFrisella/GitHub/image-capstone/images/"
 
 
 def generate_database():
@@ -18,7 +18,7 @@ def generate_database():
     for name in images:
         descriptors = []
         for path in images[name]:
-            descriptors.append(ConvertToDescriptor.jpeg_to_descriptors(myPath + path, upscale=0))
+            descriptors.append(ConvertToDescriptor.jpeg_to_descriptors(myPath + path))
         database[name] = person.Person(name, descriptors)
 
     output = open('database.p', 'wb')
