@@ -13,8 +13,8 @@ shape_predictor = models["shape predict"]
 
 def image_to_descriptors(img_array, upscale=0):
     """
-    Detects faces in an image array of shape=(H, W, 3) and turns
-    each one into a descriptor.
+    Detects faces in an image array and turns each one
+    into a 128-D descriptor.
     
     Parameters
     ----------
@@ -44,35 +44,43 @@ def image_to_descriptors(img_array, upscale=0):
 
 def camera_to_descriptors(upscale=0):
     """
-    Detects faces from a photo taken by the camera.
+    Detects faces from a photo taken by the camera and turns
+    each one into a 128-D descriptor.
     
     Parameters
     ----------
-    upscale : *See image_to_descriptors() docstring*
+    upscale : int, optional (default=0)
+        The number of times to upscale the image and reprocess it,
+        to find smaller faces
     
     Returns
     -------
     List[np.array[float]]
-        *See image_to_descriptors() docstring*
+        List of descriptor vectors of all detected faces in the
+        given img_array.
     
     """
     return image_to_descriptors(take_picture(), upscale)
 
 def jpeg_to_descriptors(filepath, upscale=0):
     """
-    Detects faces from a jpeg image file.
+    Detects faces from a jpeg image file and turns each
+    one into a 128-D descriptor.
     
     Parameters
     ----------
     filepath : string
         The file path to the jpeg image.
     
-    upscale : *See image_to_descriptors() docstring*
+    upscale : int, optional (default=0)
+        The number of times to upscale the image and reprocess it,
+        to find smaller faces
     
     Returns
     -------
     List[np.array[float]]
-        *See image_to_descriptors() docstring*
+        List of descriptor vectors of all detected faces in the
+        given img_array.
     
     """
     return image_to_descriptors(io.imread(filepath), upscale)
