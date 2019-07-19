@@ -47,7 +47,7 @@ class Person:
     def __init__(self,name,descriptors):
         self.name = name
         self.descriptors = [i for i in descriptors]
-        self.mean_descriptor = np.mean(self.descriptors)
+        self.mean_descriptor = np.mean(self.descriptors,axis=0)
 
         
     def __repr__(self):
