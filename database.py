@@ -61,3 +61,17 @@ def add_person(person,database):
     f = open('database.p','wb')
     pickle.dump(database,f)
     f.close
+
+def delete_person(person,database):
+    '''
+    Deletes someone from the database
+
+    Parameters:
+    ----------
+    person [type: Person]
+        The Person object you want to delete from the database
+
+    database [type: dict]
+        The database dictionary
+    '''
+    del database(person.name)
